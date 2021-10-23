@@ -1,4 +1,5 @@
 require "date"
+
 class Todo
   def initialize(my_text, my_date, completed_flag)
     @text = my_text
@@ -12,7 +13,6 @@ class Todo
 
   def is_overdue?
     return @due_date < Date.today
-    
   end
 
   def is_due_later?
@@ -20,19 +20,10 @@ class Todo
   end
 
   def to_displayable_string
-    if (@completed)
-      @check_mark = "X"
-    else
-      @check_mark = " "
-    end
-    if (is_due_today?)
-      @pdate = " "
-    else
-      @pdate = @due_date
-    end
+    @check_mark = if @completed then "X" else " " end
+    @pdate = if is_due_today? then "" else @due_date end
 
     return "[#{@check_mark}] #{@text} #{@pdate}"
-     
   end
 end
 
@@ -91,4 +82,3 @@ puts "\n\n"
 puts "Due Later\n"
 puts todos_list.due_later.to_displayable_list
 puts "\n\n"
-
